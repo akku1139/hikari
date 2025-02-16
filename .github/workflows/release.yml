@@ -1,23 +1,43 @@
-name: Publish Package to npmjs
+name: Create release
+
 on:
-  release:
-    types: [published]
+  push:
+    paths:
+      package.json
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     permissions:
-      contents: read
+      contents: write
       id-token: write
+
     steps:
       - uses: actions/checkout@v4
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-          registry-url: 'https://registry.npmjs.org'
+
       - uses: pnpm/action-setup@v4
         with:
           version: 10
-      - run: npm publish --provenance --access public
+
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - name: Build
+        run: |
+          pnpm install
+          pnpm build
+
+      - name: Publish to npm
+        id: publishable
+        run: pnpm publish --provenance --access public
+          # pnpm dlx can-npm-publish --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        run: gh release create v$( cat package.json | jq -r '.version' ) --generate-notes
