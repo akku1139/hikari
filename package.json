@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "tsc --noEmit"
+    "check": "tsc --noEmit"
   },
   "keywords": [],
   "license": "MIT",
