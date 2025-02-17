@@ -2,14 +2,16 @@ import { compose } from "./compose"
 import type { METHODS } from "./define"
 import { SimpleRouter } from "./router"
 import type { Router } from "./router/router-core"
-import type { Handler, Context, NotFoundHandler, ErrorHandler } from "./types"
+import type { Handler, Context, NotFoundHandler, ErrorHandler, Env } from "./types"
 
 export type HikariOptions = Partial<{
   notFound: NotFoundHandler
   onError: ErrorHandler
 }>
 
-export class HikariCore {
+export class HikariCore <
+  E extends Env = {}
+> {
   router: Router
 
   notFoundHandler: NotFoundHandler
@@ -44,8 +46,9 @@ export class HikariCore {
       new URL(request.url).pathname
     )
 
-    const context: Context = {
+    const context: Context<E> = {
       request,
+      state: Object.create(null),
       next: () => new Promise(resolve => resolve()), // fake: dispatch(current + 1)
     }
 

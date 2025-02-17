@@ -41,3 +41,5 @@ https://github.com/sveltejs/kit/blob/main/packages/kit/src/utils/routing.js
 
 - `x === void 0`
 - `!x`
+
+## `{}` vs `Object.create(null)`

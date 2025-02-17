@@ -1,8 +1,10 @@
 import type { METHODS } from "./define"
 import { HikariCore, type HikariOptions } from "./hikari-core"
-import type { Handler } from "./types"
+import type { Env, Handler } from "./types"
 
-export class Hikari extends HikariCore {
+export class Hikari <
+  E extends Env = {}
+> extends HikariCore <E> {
   constructor(options?: HikariOptions) {
     super(options)
   }
