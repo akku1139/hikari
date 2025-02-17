@@ -5,7 +5,7 @@ import type { Env, Handler } from "./types"
 export class Hikari <
   E extends Env = {}
 > extends HikariCore <E> {
-  constructor(options?: HikariOptions) {
+  constructor(options?: HikariOptions<E>) {
     super(options)
   }
 

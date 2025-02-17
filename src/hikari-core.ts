@@ -4,7 +4,7 @@ import { SimpleRouter } from "./router"
 import type { Router } from "./router/router-core"
 import type { Handler, Context, NotFoundHandler, ErrorHandler, Env } from "./types"
 
-export type HikariOptions<E> = Partial<{
+export type HikariOptions<E extends Env> = Partial<{
   notFound: NotFoundHandler<E>
   onError: ErrorHandler<E>
 }>
