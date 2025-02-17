@@ -8,15 +8,15 @@ export class SimpleRouter implements Router {
     this.routes = new Map()
   }
 
-  add(method: string, path: string, handler: () => Response): boolean {
+  add(method: string, path: string, handler: Array<Handler>): boolean {
     const route = this.routes.get([method, path])
 
     if(route === void 0) {
-      this.routes.set([method, path], [handler])
+      this.routes.set([method, path], handler)
       return true
     }
 
-    this.routes.set([method, path], [...route, handler])
+    this.routes.set([method, path], [...route, ...handler])
     return true
   }
 
