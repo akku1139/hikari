@@ -1,4 +1,4 @@
-import type { Handler } from "../types.js"
+import type { Handler } from "../types"
 import type { Router } from "./router-core"
 
 export class SimpleRouter implements Router {

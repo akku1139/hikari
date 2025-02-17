@@ -1,7 +1,7 @@
-import { METHODS } from "./define"
-import { SimpleRouter } from "./router/index.js"
-import type { Router } from "./router/router-core.js"
-import type { Handler, ResponseHandler } from "./types.js"
+import type { METHODS } from "./define"
+import { SimpleRouter } from "./router"
+import type { Router } from "./router/router-core"
+import type { Handler, ResponseHandler } from "./types"
 
 export class HikariCore {
   router: Router
@@ -17,6 +17,7 @@ export class HikariCore {
 
   on(method: typeof METHODS[number] | string, path: string, handlers: Array<Handler>) {
     this.router.add(method.toUpperCase(), path, handlers)
+    return this
   }
 
   fetch(request: Request): Response | Promise<Response> {
