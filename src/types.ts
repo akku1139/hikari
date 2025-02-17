@@ -1,9 +1,11 @@
 // export type MaybePromise<T> = T | PromiseLike<T> | Promise<T>
 
-export type HandlerArgument = {
+export type Next = () => Promise<Response | void>
+
+export type Context = {
   request: Request,
-  next: () => Promise<void>
+  next: Next,
 }
 
-export type Handler = (argument: HandlerArgument) => Response | Promise<Response> | void
-export type ResponseHandler = (argument: HandlerArgument) => Response
+export type Handler = (argument: Context) => Response | void | Promise<Response | void>
+export type ResponseHandler = (argument: Context) => Response

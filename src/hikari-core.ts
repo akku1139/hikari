@@ -1,7 +1,8 @@
+import { compose } from "./compose"
 import type { METHODS } from "./define"
 import { SimpleRouter } from "./router"
 import type { Router } from "./router/router-core"
-import type { Handler, HandlerArgument, ResponseHandler } from "./types"
+import type { Handler, Context, ResponseHandler } from "./types"
 
 export class HikariCore {
   router: Router
@@ -35,23 +36,30 @@ export class HikariCore {
       new URL(request.url).pathname
     )
 
-    const handlerArgument: HandlerArgument = {
+    const context: Context = {
       request,
-      next: () => new Promise(resolve => resolve()), // TODO: Implement
+      next: () => new Promise(resolve => resolve()), // fake: dispatch(current + 1)
     }
 
     if(handlers.length === 0) {
-      return this.notFoundHandler(handlerArgument)
+      return this.notFoundHandler(context)
     }
 
-    for(const handler of handlers) {
-      const handlerResult = handler(handlerArgument)
+    const composed = compose(handlers)
 
-      if(handlerResult instanceof Response) {
-        return handlerResult
+    return (async () => {
+      try {
+        const response = await composed(context)
+
+        if(!response) {
+          return this.errorHandler(context)
+        }
+
+        return response
+      } catch (err) {
+        // Error
+        return this.errorHandler(context)
       }
-    }
-
-    return this.errorHandler(handlerArgument)
+    })()
   }
 }
