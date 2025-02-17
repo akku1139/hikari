@@ -15,12 +15,21 @@ export class HikariCore {
     this.errorHandler = () => new Response("Internal Server Error", { status: 500 })
   }
 
-  on(method: typeof METHODS[number] | string, path: string, handlers: Array<Handler>) {
+  on(method: typeof METHODS[number], path: string, handlers: Array<Handler>) {
     this.router.add(method.toUpperCase(), path, handlers)
     return this
   }
 
   fetch(request: Request): Response | Promise<Response> {
+    if(request.method === "HEAD") {
+      return (async () =>
+        new Response(null, await this.fetch({
+          ...request,
+          method: "GET"
+        }))
+      )()
+    }
+
     const handlers = this.router.match(
       request.method,
       new URL(request.url).pathname
