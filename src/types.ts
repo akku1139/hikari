@@ -8,4 +8,5 @@ export type Context = {
 }
 
 export type Handler = (argument: Context) => Response | void | Promise<Response | void>
-export type ResponseHandler = (argument: Context) => Response
+export type NotFoundHandler = (argument: Context) => Response
+export type ErrorHandler = (argument: Context, error: unknown) => Response

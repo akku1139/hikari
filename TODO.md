@@ -14,6 +14,8 @@ https://elysiajs.com/essential/handler.html
 `// Do not `compose` if it has only one handler`
 https://github.com/honojs/hono/blob/6ae021371a38216a02f6fbddc06eebff506dfd04/src/hono-base.ts#L410C5-L410C51
 
+## Strict routing option
+
 # Main Features
 
 # Routing

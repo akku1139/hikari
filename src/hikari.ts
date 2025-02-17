@@ -1,10 +1,10 @@
 import type { METHODS } from "./define"
-import { HikariCore } from "./hikari-core"
+import { HikariCore, type HikariOptions } from "./hikari-core"
 import type { Handler } from "./types"
 
 export class Hikari extends HikariCore {
-  constructor() {
-    super()
+  constructor(options: HikariOptions) {
+    super(options)
   }
 
   #methodRoute(method: typeof METHODS[number]) {

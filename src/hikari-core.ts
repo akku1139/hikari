@@ -2,18 +2,26 @@ import { compose } from "./compose"
 import type { METHODS } from "./define"
 import { SimpleRouter } from "./router"
 import type { Router } from "./router/router-core"
-import type { Handler, Context, ResponseHandler } from "./types"
+import type { Handler, Context, NotFoundHandler, ErrorHandler } from "./types"
+
+export type HikariOptions = {
+  notFound: NotFoundHandler
+  onError: ErrorHandler
+}
 
 export class HikariCore {
   router: Router
 
-  notFoundHandler: ResponseHandler
-  errorHandler: ResponseHandler
+  notFoundHandler: NotFoundHandler
+  errorHandler: ErrorHandler
 
-  constructor() {
+  constructor(options: HikariOptions) {
     this.router = new SimpleRouter()
-    this.notFoundHandler = () => new Response("404 Not Found", { status: 404 })
-    this.errorHandler = () => new Response("Internal Server Error", { status: 500 })
+    this.notFoundHandler = options.notFound ?? (() => new Response("404 Not Found", { status: 404 }))
+    this.errorHandler = options.onError ?? ((_, error) => {
+      console.error(error)
+      return new Response("Internal Server Error", { status: 500 })}
+    )
   }
 
   on(method: typeof METHODS[number], path: string, handlers: Array<Handler>) {
@@ -52,13 +60,15 @@ export class HikariCore {
         const response = await composed(context)
 
         if(!response) {
-          return this.errorHandler(context)
+          return this.errorHandler(context, new Error(
+            "No Response was returned from handlers. Did you forget to return a Response object or `await next()`?"
+          ))
         }
 
         return response
-      } catch (err) {
+      } catch (error) {
         // Error
-        return this.errorHandler(context)
+        return this.errorHandler(context, error)
       }
     })()
   }
