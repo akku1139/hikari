@@ -1,4 +1,3 @@
-import type { METHODS } from "./define"
 import { HikariCore } from "./hikari-core"
 import type { Handler } from "./types"
 

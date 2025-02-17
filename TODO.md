@@ -1,3 +1,14 @@
+# Basic
+
+## async handler support
+
+## state api (set/get/var)
+
+## handler argument
+
+Elysia like args
+https://elysiajs.com/essential/handler.html
+
 # Main Features
 
 # Routing
@@ -14,3 +25,7 @@ https://github.com/sveltejs/kit/blob/main/packages/kit/src/utils/routing.js
 ## FastAPI-like parameter
 
 ## Unit test
+
+## Alias for HandlerArgument.request?
+
+`{ request, req }`
