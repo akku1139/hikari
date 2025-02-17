@@ -7,12 +7,12 @@ export type Env = Partial<{
 
 export type Next = () => Promise<Response | void>
 
-export type Context<E extends Env = {}> = {
+export type Context<E extends Env> = {
   request: Request
   state: E["States"]
   next: Next
 }
 
-export type Handler = (argument: Context) => Response | void | Promise<Response | void>
-export type NotFoundHandler = (argument: Context) => Response
-export type ErrorHandler = (argument: Context, error: unknown) => Response
+export type Handler<E extends Env> = (argument: Context<E>) => Response | void | Promise<Response | void>
+export type NotFoundHandler<T> = (argument: Context<T>) => Response
+export type ErrorHandler<T> = (argument: Context<T>, error: unknown) => Response

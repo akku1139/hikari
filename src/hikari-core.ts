@@ -4,9 +4,9 @@ import { SimpleRouter } from "./router"
 import type { Router } from "./router/router-core"
 import type { Handler, Context, NotFoundHandler, ErrorHandler, Env } from "./types"
 
-export type HikariOptions = Partial<{
-  notFound: NotFoundHandler
-  onError: ErrorHandler
+export type HikariOptions<E> = Partial<{
+  notFound: NotFoundHandler<E>
+  onError: ErrorHandler<E>
 }>
 
 export class HikariCore <
@@ -14,10 +14,10 @@ export class HikariCore <
 > {
   router: Router
 
-  notFoundHandler: NotFoundHandler
-  errorHandler: ErrorHandler
+  notFoundHandler: NotFoundHandler<E>
+  errorHandler: ErrorHandler<E>
 
-  constructor(options?: HikariOptions) {
+  constructor(options?: HikariOptions<E>) {
     this.router = new SimpleRouter()
     this.notFoundHandler = options?.notFound ?? (() => new Response("404 Not Found", { status: 404 }))
     this.errorHandler = options?.onError ?? ((_, error) => {
@@ -26,7 +26,7 @@ export class HikariCore <
     )
   }
 
-  on(method: typeof METHODS[number], path: string, handlers: Array<Handler>) {
+  on(method: typeof METHODS[number], path: string, handlers: Array<Handler<E>>) {
     this.router.add(method.toUpperCase(), path, handlers)
     return this
   }

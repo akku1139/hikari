@@ -3,10 +3,10 @@
  * Special thanks to @EdamAme-x
  */
 
-import type { Handler, Context, Next } from "./types"
+import type { Handler, Context, Next, Env } from "./types"
 
-export const compose = (handlers: Array<Handler>) => {
-  return (context: Context, next?: Next) => {
+export const compose = <E extends Env> (handlers: Array<Handler<E>>) => {
+  return (context: Context<E>, next?: Next) => {
     // last called middleware #
     let index = -1
 
@@ -16,7 +16,7 @@ export const compose = (handlers: Array<Handler>) => {
       }
       index = current
 
-      let handler: Handler | undefined = handlers[current]
+      let handler: Handler<E> | undefined = handlers[current]
       if(current === handlers.length) {
         handler = next
       }
