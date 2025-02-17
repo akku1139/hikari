@@ -3,7 +3,7 @@ import { HikariCore, type HikariOptions } from "./hikari-core"
 import type { Handler } from "./types"
 
 export class Hikari extends HikariCore {
-  constructor(options: HikariOptions) {
+  constructor(options?: HikariOptions) {
     super(options)
   }
 

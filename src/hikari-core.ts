@@ -4,10 +4,10 @@ import { SimpleRouter } from "./router"
 import type { Router } from "./router/router-core"
 import type { Handler, Context, NotFoundHandler, ErrorHandler } from "./types"
 
-export type HikariOptions = {
+export type HikariOptions = Partial<{
   notFound: NotFoundHandler
   onError: ErrorHandler
-}
+}>
 
 export class HikariCore {
   router: Router
@@ -15,10 +15,10 @@ export class HikariCore {
   notFoundHandler: NotFoundHandler
   errorHandler: ErrorHandler
 
-  constructor(options: HikariOptions) {
+  constructor(options?: HikariOptions) {
     this.router = new SimpleRouter()
-    this.notFoundHandler = options.notFound ?? (() => new Response("404 Not Found", { status: 404 }))
-    this.errorHandler = options.onError ?? ((_, error) => {
+    this.notFoundHandler = options?.notFound ?? (() => new Response("404 Not Found", { status: 404 }))
+    this.errorHandler = options?.onError ?? ((_, error) => {
       console.error(error)
       return new Response("Internal Server Error", { status: 500 })}
     )
