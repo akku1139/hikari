@@ -16,7 +16,15 @@ https://github.com/honojs/hono/blob/6ae021371a38216a02f6fbddc06eebff506dfd04/src
 
 ## Strict routing option
 
+
 # Main Features
+
+## Build
+
+- Context alias
+- AOT Router
+- `get()`, post, put, use, etc... -> `on(METHOD, path, handlers)`
+
 
 # Routing
 
@@ -26,6 +34,7 @@ https://github.com/honojs/hono/blob/6ae021371a38216a02f6fbddc06eebff506dfd04/src
 ## SvelteKit compatible routing
 
 https://github.com/sveltejs/kit/blob/main/packages/kit/src/utils/routing.js
+
 
 # Others
 
@@ -43,3 +52,5 @@ https://github.com/sveltejs/kit/blob/main/packages/kit/src/utils/routing.js
 - `!x`
 
 ## `{}` vs `Object.create(null)`
+
+## Linter
