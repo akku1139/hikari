@@ -1,6 +1,6 @@
-import type { Handler } from "../types"
+import type { Env, Handler } from "../types"
 
-export interface Router {
-  add(method: string, path: string, handler: Array<Handler>): boolean
-  match(method: string, path: string): Array<Handler>
+export interface Router <E extends Env> {
+  add(method: string, path: string, handler: Array<Handler<E>>): boolean
+  match(method: string, path: string): Array<Handler<E>>
 }

@@ -1,9 +1,9 @@
 // export type MaybePromise<T> = T | PromiseLike<T> | Promise<T>
 
-export type Env = Partial<{
-  Bindings: object
-  States: object
-}>
+export type Env = {
+  Bindings?: object
+  States?: object
+}
 
 export type Next = () => Promise<Response | void>
 

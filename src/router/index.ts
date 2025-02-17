@@ -1,14 +1,14 @@
-import type { Handler } from "../types"
+import type { Env, Handler } from "../types"
 import type { Router } from "./router-core"
 
-export class SimpleRouter implements Router {
-  routes: Map<[string, string], Array<Handler>>
+export class SimpleRouter <E extends Env> implements Router <E> {
+  routes: Map<[string, string], Array<Handler<E>>>
 
   constructor() {
     this.routes = new Map()
   }
 
-  add(method: string, path: string, handler: Array<Handler>): boolean {
+  add(method: string, path: string, handler: Array<Handler<E>>): boolean {
     const route = this.routes.get([method, path])
 
     if(route === void 0) {
@@ -20,7 +20,7 @@ export class SimpleRouter implements Router {
     return true
   }
 
-  match(method: string, path: string): Array<Handler> {
+  match(method: string, path: string): Array<Handler<E>> {
     const route = this.routes.get([method, path])
     return route ?? []
   }

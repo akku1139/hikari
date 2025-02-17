@@ -12,7 +12,7 @@ export type HikariOptions<E extends Env> = Partial<{
 export class HikariCore <
   E extends Env = {}
 > {
-  router: Router
+  router: Router<E>
 
   notFoundHandler: NotFoundHandler<E>
   errorHandler: ErrorHandler<E>
