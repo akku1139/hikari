@@ -3,6 +3,10 @@ import { HikariCore } from "./hikari-core"
 import type { Handler } from "./types"
 
 export class Hikari extends HikariCore {
+  constructor() {
+    super()
+  }
+
   get(path: string, ...handlers: Array<Handler>) {
     return this.on("GET", path, handlers)
   }
