@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "test": "tsc --noEmit && node --test"
+    "test": "pnpm run typecheck && pnpm run test:basic",
+    "test:basic": "node --test",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "license": "MIT",
