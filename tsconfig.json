@@ -4,10 +4,12 @@
     "module": "ES2022",
     "declaration": true,
     "moduleResolution": "Bundler",
+    "rootDir": "./src/",
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    // "erasableSyntaxOnly": true, // TypeScript 5.8
     "skipLibCheck": false,
   },
   "include": [

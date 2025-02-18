@@ -21,4 +21,4 @@ jobs:
 
       - run: pnpm install
 
-      - run: pnpm run check
+      - run: pnpm run test
