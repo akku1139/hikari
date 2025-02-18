@@ -11,6 +11,9 @@
     "strict": true,
     // "erasableSyntaxOnly": true, // TypeScript 5.8
     "skipLibCheck": false,
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "src/**/*.ts",
