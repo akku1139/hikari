@@ -12,7 +12,7 @@ export type HikariOptions<E extends Env> = Partial<{
 }>
 
 export class HikariCore <
-  E extends Env = {}
+  E extends Env
 > {
   router: Router<E>
 
@@ -33,7 +33,7 @@ export class HikariCore <
     this.getPath = strict ? getPath : getPathNoStrict
   }
 
-  on(method: typeof METHODS[number], path: string, handlers: Array<Handler<E>>) {
+  on(method: typeof METHODS[number], path: string, handlers: Array<Handler<E>>): this {
     this.router.add(method.toUpperCase(), path, handlers)
     return this
   }

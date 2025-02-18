@@ -6,7 +6,7 @@
 import type { Handler, Context, Next, Env } from "./types"
 
 export const compose = <E extends Env> (handlers: Array<Handler<E>>) => {
-  return (context: Context<E>, next?: Next) => {
+  return (context: Context<E>, next?: Next): Promise<void | Response> => {
     // last called middleware #
     let index = -1
 
