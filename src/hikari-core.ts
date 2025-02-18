@@ -2,11 +2,13 @@ import { compose } from "./compose"
 import type { METHODS } from "./define"
 import { SimpleRouter } from "./router"
 import type { Router } from "./router/router-core"
-import type { Handler, Context, NotFoundHandler, ErrorHandler, Env } from "./types"
+import type { Handler, Context, NotFoundHandler, ErrorHandler, Env, GetPath } from "./types"
+import { getPath, getPathNoStrict } from "./utils/url"
 
 export type HikariOptions<E extends Env> = Partial<{
   notFound: NotFoundHandler<E>
   onError: ErrorHandler<E>
+  strict: boolean
 }>
 
 export class HikariCore <
@@ -17,6 +19,8 @@ export class HikariCore <
   notFoundHandler: NotFoundHandler<E>
   errorHandler: ErrorHandler<E>
 
+  getPath: GetPath
+
   constructor(options?: HikariOptions<E>) {
     this.router = new SimpleRouter()
     this.notFoundHandler = options?.notFound ?? (() => new Response("404 Not Found", { status: 404 }))
@@ -24,6 +28,9 @@ export class HikariCore <
       console.error(error)
       return new Response("Internal Server Error", { status: 500 })}
     )
+
+    const strict = options?.strict ?? true
+    this.getPath = strict ? getPath : getPathNoStrict
   }
 
   on(method: typeof METHODS[number], path: string, handlers: Array<Handler<E>>) {
@@ -43,7 +50,7 @@ export class HikariCore <
 
     const handlers = this.router.match(
       request.method,
-      new URL(request.url).pathname
+      this.getPath(request)
     )
 
     const context: Context<E> = {

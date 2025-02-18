@@ -16,3 +16,5 @@ export type Context<E extends Env> = {
 export type Handler<E extends Env> = (argument: Context<E>) => Response | void | Promise<Response | void>
 export type NotFoundHandler<E extends Env> = (argument: Context<E>) => Response
 export type ErrorHandler<E extends Env> = (argument: Context<E>, error: unknown) => Response
+
+export type GetPath = (request: Request) => string
