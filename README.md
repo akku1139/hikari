@@ -1,2 +1,3 @@
 # Hikari
-A very small and ultrafast web framework
+
+A very small and ultrafast web framework.
