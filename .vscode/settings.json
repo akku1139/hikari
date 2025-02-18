@@ -1,4 +1,6 @@
 {
   "javascript.preferences.importModuleSpecifierEnding": "js",
-  "typescript.preferences.importModuleSpecifierEnding": "js"
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true
 }

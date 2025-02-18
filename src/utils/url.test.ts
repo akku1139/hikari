@@ -9,10 +9,12 @@ const pathList: Array<[string, string, string]> = [
   ["/abc/", "/abc/", "abc"]
 ]
 
-test("getPath", () => {
+test("getPath", (t) => {
   for(const p of pathList) {
-    const req = new Request(p[0])
-    strictEqual(getPath(req), p[1])
-    strictEqual(getPathNoStrict(req), p[2])
+    t.test(`path: ${p[0]}`, () => {
+      const req = new Request("https://example.com" + p[0])
+      strictEqual(getPath(req), p[1])
+      strictEqual(getPathNoStrict(req), p[2])
+    })
   }
 })
