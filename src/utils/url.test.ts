@@ -1,6 +1,6 @@
 import test from "node:test"
 import { strictEqual } from "node:assert/strict"
-import { getPath, getPathNoStrict } from "./url"
+import { getPath, getPathNoStrict } from "./url.ts"
 
 const pathList: Array<[string, string, string]> = [
   // ["input": "getPath", "getPathNoStrict"],

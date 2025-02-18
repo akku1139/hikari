@@ -1,5 +1,5 @@
-import type { Env, Handler } from "../types"
-import type { Router } from "./router-core"
+import type { Env, Handler } from "../types.ts"
+import type { Router } from "./router-core.ts"
 
 export class SimpleRouter <E extends Env> implements Router <E> {
   routes: Map<[string, string], Array<Handler<E>>>

@@ -1,4 +1,4 @@
-import type { GetPath } from "../types"
+import type { GetPath } from "../types.ts"
 
 export const getPath: GetPath = (request) => {
   const url = new URL(request.url)

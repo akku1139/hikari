@@ -18,7 +18,8 @@
     //"noEmitOnError": true,
 
     //"allowImportingTsExtensions": true,
-    //"rewriteRelativeImportExtensions": true,
+    // https://zenn.dev/uhyo/articles/rewrite-relative-import-extensions-read-before-use
+    "rewriteRelativeImportExtensions": true,
 
     // Linting
     "strict": true,

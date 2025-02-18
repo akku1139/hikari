@@ -1,9 +1,9 @@
-import { compose } from "./compose"
-import type { METHODS } from "./define"
-import { SimpleRouter } from "./router"
-import type { Router } from "./router/router-core"
-import type { Handler, Context, NotFoundHandler, ErrorHandler, Env, GetPath } from "./types"
-import { getPath, getPathNoStrict } from "./utils/url"
+import { compose } from "./compose.ts"
+import type { METHODS } from "./define.ts"
+import { SimpleRouter } from "./router/index.ts"
+import type { Router } from "./router/router-core.ts"
+import type { Handler, Context, NotFoundHandler, ErrorHandler, Env, GetPath } from "./types.ts"
+import { getPath, getPathNoStrict } from "./utils/url.ts"
 
 export type HikariOptions<E extends Env> = Partial<{
   notFound: NotFoundHandler<E>

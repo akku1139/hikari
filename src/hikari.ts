@@ -1,6 +1,6 @@
-import type { METHODS } from "./define"
-import { HikariCore, type HikariOptions } from "./hikari-core"
-import type { Env, Handler } from "./types"
+import type { METHODS } from "./define.ts"
+import { HikariCore, type HikariOptions } from "./hikari-core.ts"
+import type { Env, Handler } from "./types.ts"
 
 type MethodRoute<E extends Env> = (path: string, ...handlers: Array<Handler<E>>) => Hikari<E>
 

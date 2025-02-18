@@ -3,7 +3,7 @@
  * Special thanks to @EdamAme-x
  */
 
-import type { Handler, Context, Next, Env } from "./types"
+import type { Handler, Context, Next, Env } from "./types.ts"
 
 export const compose = <E extends Env> (handlers: Array<Handler<E>>) => {
   return (context: Context<E>, next?: Next): Promise<void | Response> => {

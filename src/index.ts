@@ -1,1 +1,1 @@
-export { Hikari } from "./hikari"
+export { Hikari } from "./hikari.ts"
