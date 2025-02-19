@@ -3,7 +3,7 @@
  * Special thanks to @EdamAme-x
  */
 
-import type { Params } from "./router/router-core.js"
+import type { Params } from "./router/router-core.ts"
 import type { Handler, Next, Env, RequestContext, HandlerContext } from "./types.ts"
 
 export const compose = <E extends Env> (handlers: Array<[Handler<E>, Params]>) => {
