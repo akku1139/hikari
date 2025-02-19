@@ -19,7 +19,7 @@ export class HikariCore <
   notFoundHandler: NotFoundHandler<E>
   errorHandler: ErrorHandler<E>
 
-  getPath: GetPath
+  #getPath: GetPath
 
   constructor(options?: HikariOptions<E>) {
     this.router = new SimpleRouter()
@@ -30,10 +30,11 @@ export class HikariCore <
     )
 
     const strict = options?.strict ?? true
-    this.getPath = strict ? getPath : getPathNoStrict
+    this.#getPath = strict ? getPath : getPathNoStrict
   }
 
   on(method: typeof METHODS[number], path: string, handlers: Array<Handler<E>>): this {
+    // TODO: use getPath
     this.router.add(method.toUpperCase(), path, handlers)
     return this
   }
@@ -50,7 +51,7 @@ export class HikariCore <
 
     const handlers = this.router.match(
       request.method,
-      this.getPath(request)
+      this.#getPath(request)
     )
 
     const context: Context<E> = {
