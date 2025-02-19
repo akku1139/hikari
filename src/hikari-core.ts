@@ -33,7 +33,7 @@ export class HikariCore <
     this.#getPath = strict ? getPath : getPathNoStrict
   }
 
-  on(method: typeof METHODS[number], path: string, ...handlers: Array<Handler<E>>): this {
+  on(method: typeof METHODS[number] | (string & {}), path: string, ...handlers: Array<Handler<E>>): this {
     // TODO: use getPath
     for (const handler of handlers) {
       this.router.add(method.toUpperCase(), path, handler)

@@ -13,7 +13,7 @@ export class Hikari <
   }
 
   #methodRoute(method: typeof METHODS[number]) {
-    return (path: string, ...handlers: Array<Handler<E>>): this => this.on(method, path, handlers)
+    return (path: string, ...handlers: Array<Handler<E>>): this => this.on(method, path, ...handlers)
   }
   get: MethodRoute<E> = this.#methodRoute("GET")
   post: MethodRoute<E> = this.#methodRoute("POST")
@@ -23,12 +23,7 @@ export class Hikari <
   patch: MethodRoute<E> = this.#methodRoute("PATCH")
   use(path: string, ...handlers: Array<Handler<E>>): this {
     return this
-      .on("GET", path, handlers)
-      .on("POST", path, handlers)
-      .on("PUT", path, handlers)
-      .on("DELETE", path, handlers)
-      .on("OPTIONS", path, handlers)
-      .on("PATCH", path, handlers)
+      .on("ALL", path, ...handlers)
   }
   all: MethodRoute<E> = this.use
 }
