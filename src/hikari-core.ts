@@ -2,7 +2,7 @@ import { compose } from "./compose.ts"
 import type { METHODS } from "./define.ts"
 import { HikariRouter } from "./router/index.ts"
 import type { Router } from "./router/router-core.ts"
-import type { Handler, NotFoundHandler, ErrorHandler, Env, GetPath, RequestContext } from "./types.ts"
+import type { Handler, NotFoundHandler, ErrorHandler, Env, GetPath, RequestContext, HandlerContext } from "./types.ts"
 import { getPath, getPathNoStrict } from "./utils/url.ts"
 
 export type HikariOptions<E extends Env> = Partial<{
@@ -65,7 +65,14 @@ export class HikariCore <
       return this.notFoundHandler(context)
     }
 
-    const composed = compose(handlers)
+    const composed = handlers.length === 1 ?  async (context: RequestContext<E>) => {
+      const hContext: HandlerContext<E> = {
+        ...context,
+        next: async () => { /* Do Nothing */  },
+        param: (param: string) => handlers[0]![1][param]
+      }
+      return await handlers[0]![0](hContext)
+    } : compose(handlers)
 
     return (async () => {
       try {
