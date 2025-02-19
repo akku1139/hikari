@@ -7,14 +7,18 @@ export type Env = {
 
 export type Next = () => Promise<Response | void>
 
-export type Context<E extends Env> = {
+export type RequestContext<E extends Env> = {
   request: Request
   state: E["States"]
-  next: Next
 }
 
-export type Handler<E extends Env> = (argument: Context<E>) => Response | void | Promise<Response | void>
-export type NotFoundHandler<E extends Env> = (argument: Context<E>) => Response
-export type ErrorHandler<E extends Env> = (argument: Context<E>, error: unknown) => Response
+export type HandlerContext<E extends Env> = RequestContext<E> & {
+  next: Next
+  param: (param: string) => string | undefined
+}
+
+export type Handler<E extends Env> = (argument: HandlerContext<E>) => Response | void | Promise<Response | void>
+export type NotFoundHandler<E extends Env> = (argument: RequestContext<E>) => Response
+export type ErrorHandler<E extends Env> = (argument: RequestContext<E>, error: unknown) => Response
 
 export type GetPath = (request: Request) => string
