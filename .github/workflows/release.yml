@@ -39,4 +39,4 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish package
-        run: npx jsr publish
+        run: pnpm dlx jsr publish

@@ -12,7 +12,7 @@ on:
       - ".gitignore"
 
 jobs:
-  typescript:
+  main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +26,7 @@ jobs:
       - run: pnpm install
       - run: pnpm run typecheck
       - run: pnpm run build
+      - run: pnpm dlx jsr publish --dry-run
 
   test:
     runs-on: ubuntu-latest
