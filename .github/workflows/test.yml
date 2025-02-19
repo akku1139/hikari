@@ -1,50 +1,47 @@
-name: Check
+name: Test
 
 on:
   push:
+    branches: [main]
+  pull_request:
+    branches: ["*"]
+    paths-ignore:
+      - "docs/**"
+      - ".vscode/**"
+      - "README.md"
+      - ".gitignore"
 
 jobs:
-  typecheck:
+  typescript:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
         with:
           version: 10
-
       - uses: actions/setup-node@v4
         with:
           node-version: 23.x
           cache: pnpm
-
       - run: pnpm install
-
       - run: pnpm run typecheck
+      - run: pnpm run build
 
   test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         type: [basic]
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
         with:
           version: 10
-
       - uses: actions/setup-node@v4
         with:
           node-version: 23.x
           cache: pnpm
-
       - run: pnpm install
-
       - run: pnpm run test:${{ matrix.type }}
-
       - run: pnpm run test:${{ matrix.type }} --trace-warnings
         if: ${{ failure() }}
