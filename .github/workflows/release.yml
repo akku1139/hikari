@@ -37,3 +37,6 @@ jobs:
           # pnpm dlx can-npm-publish --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish package
+        run: npx jsr publish
