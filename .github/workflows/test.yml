@@ -25,7 +25,7 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm run typecheck
-      - run: pnpm run build
+      - run: pnpm run build && find ./dist -type f
       - run: pnpm run jsr:publish --dry-run
 
   test:
