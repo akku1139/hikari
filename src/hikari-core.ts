@@ -1,8 +1,8 @@
 import { compose } from "./compose.ts"
 import type { METHODS } from "./define.ts"
-import { SimpleRouter } from "./router/index.ts"
+import { HikariRouter } from "./router/index.ts"
 import type { Router } from "./router/router-core.ts"
-import type { Handler, Context, NotFoundHandler, ErrorHandler, Env, GetPath } from "./types.ts"
+import type { Handler, NotFoundHandler, ErrorHandler, Env, GetPath, RequestContext, HandlerContext } from "./types.ts"
 import { getPath, getPathNoStrict } from "./utils/url.ts"
 
 export type HikariOptions<E extends Env> = Partial<{
@@ -22,7 +22,7 @@ export class HikariCore <
   #getPath: GetPath
 
   constructor(options?: HikariOptions<E>) {
-    this.router = new SimpleRouter()
+    this.router = new HikariRouter()
     this.notFoundHandler = options?.notFound ?? (() => new Response("404 Not Found", { status: 404 }))
     this.errorHandler = options?.onError ?? ((_, error) => {
       console.error(error)
@@ -33,9 +33,11 @@ export class HikariCore <
     this.#getPath = strict ? getPath : getPathNoStrict
   }
 
-  on(method: typeof METHODS[number], path: string, handlers: Array<Handler<E>>): this {
+  on(method: typeof METHODS[number] | (string & {}), path: string, ...handlers: Array<Handler<E>>): this {
     // TODO: use getPath
-    this.router.add(method.toUpperCase(), path, handlers)
+    for (const handler of handlers) {
+      this.router.add(method.toUpperCase(), path, handler)
+    }
     return this
   }
 
@@ -54,17 +56,23 @@ export class HikariCore <
       this.#getPath(request)
     )
 
-    const context: Context<E> = {
+    const context: RequestContext<E> = {
       request,
       state: Object.create(null),
-      next: () => new Promise(resolve => resolve()), // fake: dispatch(current + 1)
     }
 
     if(handlers.length === 0) {
       return this.notFoundHandler(context)
     }
 
-    const composed = compose(handlers)
+    const composed = handlers.length === 1 ?  async (context: RequestContext<E>) => {
+      const hContext: HandlerContext<E> = {
+        ...context,
+        next: async () => { /* Do Nothing */  },
+        param: (param: string) => handlers[0]![1][param]
+      }
+      return await handlers[0]![0](hContext)
+    } : compose(handlers)
 
     return (async () => {
       try {
@@ -72,7 +80,7 @@ export class HikariCore <
 
         if(!response) {
           return this.errorHandler(context, new Error(
-            "No Response was returned from handlers. Did you forget to return a Response object or `await next()`?"
+            "Did you forget to return a Response object or `await next()`?"
           ))
         }
 
