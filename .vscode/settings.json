@@ -2,5 +2,11 @@
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "typescript.preferences.importModuleSpecifierEnding": "js",
   "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true
+  "files.trimFinalNewlines": true,
+  "typescript.format.semicolons": "remove",
+  "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+  "javascript.suggest.includeCompletionsForImportStatements": false,
+  "javascript.format.semicolons": "remove",
+  "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
+  "typescript.suggest.includeCompletionsForImportStatements": false
 }
