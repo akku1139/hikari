@@ -2,7 +2,7 @@
 
 ## async handler support
 
-## state api (set/get/var)
+## states api (set/get/var)
 
 ## handler argument
 
@@ -51,8 +51,6 @@ https://github.com/sveltejs/kit/blob/main/packages/kit/src/utils/routing.js
 ## Linter
 
 ## Publish to JSR
-
-## `state` or `States`
 
 ## Implement `HikariCore.on("ALL", ...)` on HikariCore
 

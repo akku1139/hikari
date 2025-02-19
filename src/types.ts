@@ -9,7 +9,7 @@ export type Next = () => Promise<Response | void>
 
 export type RequestContext<E extends Env> = {
   request: Request
-  state: E["States"]
+  states: E["States"]
 }
 
 export type HandlerContext<E extends Env> = RequestContext<E> & {

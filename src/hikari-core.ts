@@ -58,7 +58,7 @@ export class HikariCore <
 
     const context: RequestContext<E> = {
       request,
-      state: Object.create(null),
+      states: Object.create(null),
     }
 
     if(handlers.length === 0) {
