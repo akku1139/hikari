@@ -19,7 +19,7 @@ export class Hikari <
   post: MethodRoute<E> = this.#methodRoute("POST")
   put: MethodRoute<E> = this.#methodRoute("PUT")
   delete: MethodRoute<E> = this.#methodRoute("DELETE")
-  options = this.#methodRoute("OPTIONS")
+  options: MethodRoute<E> = this.#methodRoute("OPTIONS")
   patch: MethodRoute<E> = this.#methodRoute("PATCH")
   use(path: string, ...handlers: Array<Handler<E>>): this {
     return this
