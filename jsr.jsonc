@@ -7,6 +7,9 @@
   "exports": {},
   "publish": {
     "include": [
+      "jsr.jsonc",
+      "LICENSE",
+      "README.md",
       "src/**/*.ts"
     ],
     "exclude": [
