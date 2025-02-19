@@ -12,8 +12,6 @@
     "forceConsistentCasingInFileNames": true, // Windows...
 
     // Output
-    "rootDir": "./src/",
-    "outDir": "./dist/",
     "declaration": true,
     //"noEmitOnError": true,
 

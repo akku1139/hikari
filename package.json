@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
+    "jsr:publish": "node scripts/jsrgen.ts && jsr publish",
     "test": "pnpm run typecheck && pnpm run test:basic",
     "test:basic": "node --test",
     "typecheck": "tsc --noEmit"
