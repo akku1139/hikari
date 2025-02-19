@@ -53,3 +53,7 @@ https://github.com/sveltejs/kit/blob/main/packages/kit/src/utils/routing.js
 ## Publish to JSR
 
 ## `state` or `States`
+
+## Implement `HikariCore.on("ALL", ...)` on HikariCore
+
+currently on the router side
