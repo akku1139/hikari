@@ -22,3 +22,5 @@ export type NotFoundHandler<E extends Env> = (argument: RequestContext<E>) => Re
 export type ErrorHandler<E extends Env> = (argument: RequestContext<E>, error: unknown) => Response
 
 export type GetPath = (request: Request) => string
+
+export type ResponseHelper<T> = (body: T, status?: number, headers?: HeadersInit) => Response
