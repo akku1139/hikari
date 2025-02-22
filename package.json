@@ -1,8 +1,18 @@
 {
   "name": "hikari",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "description": "A very small and ultrafast web framework",
+  "keywords": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akku1139/hikari.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "type": "module",
+  "files": ["dist"],
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "jsr:publish": "node scripts/jsrgen.ts && jsr publish",
@@ -10,8 +20,6 @@
     "test:basic": "node --test",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": [],
-  "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.13.4",
     "jsr": "^0.13.3",
