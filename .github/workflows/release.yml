@@ -38,5 +38,5 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: "true"
 
-      - name: Publish package
+      - name: Publish to JSR
         run: pnpm run jsr:publish

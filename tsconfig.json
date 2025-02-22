@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "ES6",
+    "target": "ES2024",
+    "module": "ESNext",
     "moduleResolution": "Bundler",
 
     // Module
