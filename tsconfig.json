@@ -10,6 +10,7 @@
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true, // Windows...
+    "resolveJsonModule": true,
 
     // Output
     "declaration": true,
