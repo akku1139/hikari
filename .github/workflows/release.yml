@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
       id-token: write
 
     steps:
@@ -33,10 +32,11 @@ jobs:
 
       - name: Publish to npm
         id: publishable
-        run: pnpm publish --provenance --access public
+        run: pnpm publish --access public --no-git-checks
           # pnpm dlx can-npm-publish --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "true"
 
       - name: Publish package
         run: pnpm run jsr:publish
