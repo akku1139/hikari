@@ -4,10 +4,6 @@ import * as path from "node:path"
 
 import * as pkg from "../package.json" with { type: "json" }
 
-if(process.env.npm_package_version === void 0) {
-  throw new Error("process.env.npm_package_version is undefined.")
-}
-
 const jsrjson = {
   name: "@hikarijs/hikari",
   version: pkg.version,
