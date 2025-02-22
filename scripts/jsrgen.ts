@@ -2,7 +2,7 @@ import * as process from "node:process"
 import * as fs from "node:fs"
 import * as path from "node:path"
 
-import * as pkg from "../package.json" with { type: "json" }
+import pkg from "../package.json" with { type: "json" }
 
 const jsrjson = {
   name: "@hikarijs/hikari",
