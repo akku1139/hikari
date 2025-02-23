@@ -15,6 +15,11 @@ export class HikariCore <
   E extends Env
 > {
   router: Router<E>
+  routes: Array<{
+    path: string
+    method: string
+    handler: Handler<E>
+  }>
 
   notFoundHandler: NotFoundHandler<E>
   errorHandler: ErrorHandler<E>
@@ -23,6 +28,7 @@ export class HikariCore <
 
   constructor(options?: HikariOptions<E>) {
     this.router = new HikariRouter()
+    this.routes = []
     this.notFoundHandler = options?.notFound ?? (() => new Response("404 Not Found", { status: 404 }))
     this.errorHandler = options?.onError ?? ((_, error) => {
       console.error(error)
@@ -33,10 +39,11 @@ export class HikariCore <
     this.#getPath = strict ? getPath : getPathNoStrict
   }
 
-  on(method: typeof METHODS[number] | (string & {}), path: string, handlers: Array<Handler<E>>): this {
+  on(method: METHODS | (string & {}), path: string, handlers: Array<Handler<E>>): this {
     // TODO: use getPath
     for (const handler of handlers) {
       this.router.add(method.toUpperCase(), path, handler)
+      this.routes.push({ method, path, handler })
     }
     return this
   }

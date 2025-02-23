@@ -12,7 +12,7 @@ export class Hikari <
     super(options)
   }
 
-  #methodRoute(method: typeof METHODS[number]) {
+  #methodRoute(method: METHODS) {
     const fn: MethodRoute<E> = (path, ...handlers) => this.on(method, path, handlers)
     return fn
   }
