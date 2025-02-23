@@ -25,4 +25,17 @@ export class Hikari <
     return this.on("ALL", path, handlers)
   }
   all: MethodRoute<E> = this.use
+
+  request(target: RequestInfo | URL, init?: RequestInit): Response | Promise<Response> {
+    if(target instanceof Request) {
+      return this.fetch(init ? new Request(target, init) : target)
+    }
+    if(target instanceof URL) {
+      return this.fetch(new Request(target, init))
+    }
+    return this.fetch(new Request(
+      /^https?:\/\//.test(target) ? target : new URL(target, "http://localhost"),
+      init
+    ))
+  }
 }
