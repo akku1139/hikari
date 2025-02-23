@@ -13,7 +13,8 @@ export class Hikari <
   }
 
   #methodRoute(method: typeof METHODS[number]) {
-    return (path: string, ...handlers: Array<Handler<E>>): this => this.on(method, path, handlers)
+    const fn: MethodRoute<E> = (path, ...handlers) => this.on(method, path, handlers)
+    return fn
   }
   get: MethodRoute<E> = this.#methodRoute("GET")
   post: MethodRoute<E> = this.#methodRoute("POST")
