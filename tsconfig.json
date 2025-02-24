@@ -6,7 +6,7 @@
 
     // Module
     "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true, // https://github.com/microsoft/TypeScript/issues/47862
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true, // Windows...
