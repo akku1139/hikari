@@ -13,7 +13,7 @@ importers:
         version: 22.13.8
       jsr:
         specifier: ^0.13.3
-        version: 0.13.3
+        version: 0.13.4
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -23,8 +23,8 @@ packages:
   '@types/node@22.13.8':
     resolution: {integrity: sha512-G3EfaZS+iOGYWLLRCEAXdWK9my08oHNZ+FHluRiggIYJPOXzhOiDgpVCUHaUvyIC5/fj7C/p637jdzC666AOKQ==}
 
-  jsr@0.13.3:
-    resolution: {integrity: sha512-iPt9r1lMK8BIdGwLP9/PslqkP8HoU3tn3c26qrQlavC6sgqy7lbJk0wLHbrbKZCD5a7RIomvTivvJTFQrvkIPQ==}
+  jsr@0.13.4:
+    resolution: {integrity: sha512-GJ9Ju8kf2SxH90C1AqANrMKBFlDjrZu1YoFm4SoMCOBOxix3Bvirdg5JB31gbF8FwPBo3196dAaqV0WUjeuq8Q==}
     hasBin: true
 
   kolorist@1.8.0:
@@ -52,7 +52,7 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
-  jsr@0.13.3:
+  jsr@0.13.4:
     dependencies:
       kolorist: 1.8.0
       node-stream-zip: 1.15.0
