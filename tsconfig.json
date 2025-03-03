@@ -28,7 +28,7 @@
     "noUncheckedSideEffectImports": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
-    //"erasableSyntaxOnly": true, // TypeScript 5.8
+    "erasableSyntaxOnly": true,
     "isolatedDeclarations": true,
 
     "skipLibCheck": false,
