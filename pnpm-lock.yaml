@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@types/node':
         specifier: ^22.13.4
-        version: 22.14.0
+        version: 22.14.1
       jsr:
         specifier: ^0.13.3
         version: 0.13.4
@@ -20,8 +20,8 @@ importers:
 
 packages:
 
-  '@types/node@22.14.0':
-    resolution: {integrity: sha512-Kmpl+z84ILoG+3T/zQFyAJsU6EPTmOCj8/2+83fSN6djd6I4o7uOuGIH6vq3PrjY5BGitSbFuMN18j3iknubbA==}
+  '@types/node@22.14.1':
+    resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
 
   jsr@0.13.4:
     resolution: {integrity: sha512-GJ9Ju8kf2SxH90C1AqANrMKBFlDjrZu1YoFm4SoMCOBOxix3Bvirdg5JB31gbF8FwPBo3196dAaqV0WUjeuq8Q==}
@@ -48,7 +48,7 @@ packages:
 
 snapshots:
 
-  '@types/node@22.14.0':
+  '@types/node@22.14.1':
     dependencies:
       undici-types: 6.21.0
 
