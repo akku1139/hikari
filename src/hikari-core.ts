@@ -64,34 +64,53 @@ export class HikariCore <
     )
 
     const context: RequestContext<E> = {
+      headers: new Headers(),
       request,
       states: Object.create(null),
+      responses: [],
     }
 
     if(handlers.length === 0) {
       return this.notFoundHandler(context)
     }
 
-    const composed = handlers.length === 1 ?  async (context: RequestContext<E>) => {
-      const hContext: HandlerContext<E> = {
-        ...context,
+    const composed = handlers.length === 1 ? async (requestContext: RequestContext<E>) => {
+      const context: HandlerContext<E> = {
+        ...requestContext,
         next: async () => { /* Do Nothing */  },
         param: (param: string) => handlers[0]![1][param]
       }
-      return await handlers[0]![0](hContext)
+      const response = await handlers[0]![0](context)
+      if(response) {
+        context.responses.push(response)
+      }
     } : compose(handlers)
 
     return (async () => {
       try {
-        const response = await composed(context)
+        await composed(context)
 
-        if(!response) {
+        if(context.responses.length === 0) {
           return this.errorHandler(context, new Error(
             "Did you forget to return a Response object or `await next()`?"
           ))
         }
 
-        return response
+        const mergedRes = new Response(
+          await context.responses[0]!.arrayBuffer(),
+          {
+            status: context.responses[0]!.status,
+            statusText: context.responses[0]!.statusText,
+            // If the header names are duplicated, they will be combined.
+            // headers: new Headers([...context.headers.entries(), ...context.responses[0]!.headers.entries()]),
+            headers: new Headers({
+              ...Object.fromEntries(context.headers.entries()),
+              ...Object.fromEntries(context.responses[0]!.headers.entries()),
+            }),
+          }
+        )
+
+        return mergedRes
       } catch (error) {
         // Error
         return this.errorHandler(context, error)

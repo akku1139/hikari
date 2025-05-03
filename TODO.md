@@ -19,7 +19,7 @@ https://elysiajs.com/essential/handler.html
 - Context alias
 - AOT Router
 - `get()`, post, put, use, etc... -> `on(METHOD, path, handlers)`
-
+- Compact compose fn https://github.com/koajs/compose/commit/e8b81a53fe646e527ae64f5a033d8e748d6d8879
 
 # Routing
 

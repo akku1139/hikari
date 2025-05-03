@@ -8,8 +8,10 @@ export type Env = {
 export type Next = () => Promise<Response | void>
 
 export type RequestContext<E extends Env> = {
+  headers: Headers
   request: Request
   states: E["States"]
+  responses: Array<Response>
 }
 
 export type HandlerContext<E extends Env> = RequestContext<E> & {
