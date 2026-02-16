@@ -13,7 +13,7 @@ importers:
         version: 25.2.2
       jsr:
         specifier: ^0.14.1
-        version: 0.14.2
+        version: 0.14.3
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
@@ -23,8 +23,8 @@ packages:
   '@types/node@25.2.2':
     resolution: {integrity: sha512-BkmoP5/FhRYek5izySdkOneRyXYN35I860MFAGupTdebyE66uZaR+bXLHq8k4DirE5DwQi3NuhvRU1jqTVwUrQ==}
 
-  jsr@0.14.2:
-    resolution: {integrity: sha512-yrnhXNyTqX7RWym4SVbGX+P9U63VRRN0llSN4psz4IEoGw20alehT0PX71ecmY5vMxNXtCJ16oWlnfaoVg9wdA==}
+  jsr@0.14.3:
+    resolution: {integrity: sha512-PGxnDepx7vwJoZQe2SHbyBiFfpGwsOKmX4kn/wZZqfMafV7fjXqTxSaX6lp9QHYkSTLKkER+P/wmrZY3gVJNzg==}
     hasBin: true
 
   node-stream-zip@1.15.0:
@@ -49,7 +49,7 @@ snapshots:
     dependencies:
       undici-types: 7.16.0
 
-  jsr@0.14.2:
+  jsr@0.14.3:
     dependencies:
       node-stream-zip: 1.15.0
       semiver: 1.1.0
