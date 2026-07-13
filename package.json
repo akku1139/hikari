@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/node": "^26.0.0",
     "jsr": "^0.14.1",
-    "typescript": "^6.0.2"
+    "typescript": "^7.0.2"
   },
   "exports": {
     ".": {
